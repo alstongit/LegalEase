@@ -25,6 +25,9 @@ const UploadForm = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
+    console.log("API Response:", response.data);
+
+
       setResults(response.data);
     } catch (error) {
       console.error("Error uploading file:", error);
@@ -53,12 +56,14 @@ const UploadForm = () => {
           <h3 className="text-xl font-semibold">Analysis Results:</h3>
           <ul className="mt-2">
             {results.predictions.map((item, index) => (
-              <li key={index} className="border-b py-2">
-                <strong>Clause:</strong> {item.sentence} <br />
-                <strong>Unfair Probability:</strong> {item.unfair_probability}
-              </li>
-            ))}
-          </ul>
+              <li key={index} className="border-b py-4">
+                <p><strong>Clause:</strong> {item.clause}</p>
+                <p><strong>Prediction:</strong> {item.label}</p>
+                <p><strong>Confidence:</strong> {item.confidence}</p>
+                </li>
+              ))}
+              </ul>
+
         </div>
       )}
     </div>

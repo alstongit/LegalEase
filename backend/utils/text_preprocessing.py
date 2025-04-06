@@ -23,26 +23,3 @@ def preprocess_text(text):
     
     return sentences
 
-def predict_unfair_clauses(sentences):
-    """Pass sentences to the model and get predictions."""
-    
-    # Tokenize input text
-    inputs = tokenizer(sentences, padding=True, truncation=True, max_length=512, return_tensors="pt")
-    
-    # Move model and inputs to GPU if available
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model.to(device)
-    inputs = {key: value.to(device) for key, value in inputs.items()}
-    
-    # Get model predictions
-    with torch.no_grad():
-        outputs = model(**inputs)
-    
-    # Convert logits to class probabilities
-    predictions = torch.softmax(outputs.logits, dim=1)
-    unfair_probs = predictions[:, 1].tolist()  # Assuming class 1 is 'unfair'
-
-    # Combine sentences with their unfair probability
-    results = [{"sentence": sent, "unfair_probability": round(prob, 3)} for sent, prob in zip(sentences, unfair_probs)]
-    
-    return results
