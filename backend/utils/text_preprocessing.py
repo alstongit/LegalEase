@@ -7,9 +7,6 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 nltk.download('punkt')
 
 # Load the tokenizer and model (change path if needed)
-MODEL_PATH = "./legalbert_unfair_clause_model"  # Update this to your local model path
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
 
 def preprocess_text(text):
     """Cleans and prepares text for model input."""
