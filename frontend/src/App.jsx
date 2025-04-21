@@ -6,12 +6,12 @@ import LandingPage from "./pages/LandingPage"; // create this if not already don
 
 function App() {
   return (
-    <Router>
+    
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/analyze" element={<AnalyzePage />} />
       </Routes>
-    </Router>
+    
   );
 }
 

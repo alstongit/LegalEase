@@ -3,3 +3,29 @@
 html {
   scroll-behavior: smooth;
 }
+@media print {
+  button {
+    display: none !important;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+/* App.css or inside your report container class */
+
+.loader {
+  border-width: 2px;
+  border-style: solid;
+  border-color: transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

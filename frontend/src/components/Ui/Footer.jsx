@@ -10,7 +10,7 @@ const FooterSection = () => {
           <div>
             <div className="flex items-center mb-4">
               <div className="w-6 h-6 bg-blue-500 rounded-sm mr-2"></div>
-              <span className="font-bold text-lg">LegalScan</span>
+              <span className="font-bold text-lg">LegalEase</span>
             </div>
             <p className="text-gray-400 text-sm mb-6">
               AI-powered legal document analysis to identify unfair clauses and protect your interests.
@@ -57,7 +57,7 @@ const FooterSection = () => {
         </div>
         
         <div className="border-t border-gray-800 pt-6 text-center text-gray-400 text-sm">
-          © 2025 LegalScan. All rights reserved.
+          © 2025 LegalEase. All rights reserved.
         </div>
       </div>
     </footer>

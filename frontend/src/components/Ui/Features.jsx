@@ -9,7 +9,7 @@ const FeaturesSection = () => {
             Features
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            How LegalScan Protects Your Interests
+            How LegalEase Protects Your Interests
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto">
             Our AI-powered platform analyzes legal documents to identify potentially unfair clauses

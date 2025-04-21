@@ -22,13 +22,13 @@ const TestimonialsSection = () => {
       
       <div className="flex flex-wrap justify-center gap-6">
         <TestimonialCard 
-          quote="LegalScan has transformed our contract review process. We've saved countless hours and identified several unfair clauses that would have caused problems down the line."
+          quote="LegalEase has transformed our contract review process. We've saved countless hours and identified several unfair clauses that would have caused problems down the line."
           name="Sarah Johnson"
           title="Legal Counsel, TechCorp"
         />
         
         <TestimonialCard 
-          quote="As a small business owner, I don't have the resources for extensive legal reviews. LegalScan gives me peace of mind when signing contracts with larger companies."
+          quote="As a small business owner, I don't have the resources for extensive legal reviews. LegalEase gives me peace of mind when signing contracts with larger companies."
           name="Michael Chen"
           title="CEO, Startup Innovations"
         />

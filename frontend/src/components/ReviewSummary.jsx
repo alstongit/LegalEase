@@ -50,9 +50,9 @@ const ReviewSummary = ({ review }) => {
   }
 
   return (
-    <div className="bg-yellow-50 border border-yellow-200 p-6 rounded-xl shadow-md">
-      <h3 className="text-xl font-semibold mb-2">Review Summary</h3>
-      <div className="space-y-4 text-gray-800 text-sm leading-relaxed">{content}</div>
+    <div className="bg-yellow-50 border border-yellow-300 p-6 rounded-lg shadow-md">
+      <h3 className="text-2xl font-bold text-yellow-800 mb-4">Review Summary</h3>
+      <div className="space-y-4 text-gray-700 text-base leading-relaxed">{content}</div>
     </div>
   );
 };

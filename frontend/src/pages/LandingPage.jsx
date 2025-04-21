@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import FeaturesSection from "../components/Features";
-import HowItWorksSection from "../components/HowItWorks";
-import InterfaceSection from "../components/Interface";
-import CallToActionSection from "../components/CallToAction";
-import TestimonialsSection from "../components/Testimonials";
-import FooterSection from "../components/Footer";
+import Navbar from "../components/Ui/Navbar";
+import FeaturesSection from "../components/Ui/Features";
+import HowItWorksSection from "../components/Ui/HowItWorks";
+import InterfaceSection from "../components/Ui/Interface";
+import CallToActionSection from "../components/Ui/CallToAction";
+import TestimonialsSection from "../components/Ui/Testimonials";
+import FooterSection from "../components/Ui/Footer";
 import { CheckCircleIcon } from "lucide-react";
 import "@fontsource/inter"; // Import Inter font
 
