@@ -23,7 +23,10 @@ from pydantic import BaseModel
 from utils.chatbot_handler import get_chat_response
 from utils.clause_indexer import create_vector_store_from_clauses
 
+from utils import document_generator
+
 app = FastAPI()
+app.include_router(document_generator.router)
 
 # CORS Setup
 app.add_middleware(
@@ -53,7 +56,7 @@ async def upload_pdf(file: UploadFile = File(...)):
 
     # Step 2: Split into clauses using Gemini
     clauses = split_into_clauses(text)
-    create_vector_store_from_clauses(clauses)
+    create_vector_store_from_clauses(clauses)#rag for chatbot
 
     
     # Step 3: Predict
