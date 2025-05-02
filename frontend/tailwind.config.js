@@ -1,21 +1,23 @@
+const { backgroundImage } = require("html2canvas/dist/types/css/property-descriptors/background-image");
+const { fontFamily } = require("html2canvas/dist/types/css/property-descriptors/font-family");
+
 module.exports = {
-  darkMode: "class",  // enable toggling via a `.dark` class
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
+    fontFamily: {
+      inter: ["Inter", "sans-serif"],
+    },
     extend: {
-      colors: {
-        primary: "#3b82f6",
-        accent: "#6366f1",
-        bg: "#0e0e10",
-        surface: "#1a1a1d",
-        text: {
-          base: "#e4e4e7",
-          muted: "#a1a1aa"
-        },
-      },
-      fontFamily: {
-        inter: ["Inter", "sans-serif"],
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
     },
   },
-  plugins: [],
-}
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["dark"], // sets your default theme to dark
+  },
+};

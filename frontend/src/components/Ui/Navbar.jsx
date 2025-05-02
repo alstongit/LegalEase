@@ -1,61 +1,84 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useUser, SignInButton, SignOutButton, UserButton } from "@clerk/clerk-react";
+import React, { useState, useEffect } from "react";
+import { FileSearch, Sun, Moon } from "lucide-react";
+import { SignInButton, SignOutButton, useUser } from "@clerk/clerk-react";
 
 const Navbar = () => {
-  const { isSignedIn, user } = useUser();
-  const navigate = useNavigate();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
+  const { user, isSignedIn } = useUser();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const toggleTheme = () => {
+    setDarkMode(!darkMode);
+    document.documentElement.classList.toggle("dark", !darkMode);
+  };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 px-8 py-5 bg-white z-50 flex justify-between items-center shadow">
-      <div className="flex items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-        <span className="text-xl font-semibold tracking-tight">LegalEase</span>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-black/80 backdrop-blur-md shadow-md py-3"
+          : "bg-transparent py-5"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
+        <a href="/" className="flex items-center gap-2">
+          <div className="bg-white text-black p-2 rounded-md flex items-center justify-center">
+            <FileSearch size={18} />
+          </div>
+          <span className="text-xl font-semibold tracking-tight text-white">
+            LegalEase
+          </span>
+        </a>
+
+        <div className="hidden md:flex items-center gap-8">
+          <a
+            href="#features"
+            className="text-white/80 hover:text-white transition"
+          >
+            Features
+          </a>
+
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full bg-transparent hover:bg-white/10 transition"
+          >
+            {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+
+          {isSignedIn ? (
+            <>
+              <span className="text-white/80">{user.fullName || user.username}</span>
+              <SignOutButton>
+                <button className="bg-white text-black px-4 py-2 rounded-md hover:scale-105 transition">
+                  Logout
+                </button>
+              </SignOutButton>
+            </>
+          ) : (
+            <>
+              <SignInButton mode="modal">
+                <button className="border border-white text-white px-4 py-2 rounded-md hover:bg-white hover:text-black transition">
+                  Login
+                </button>
+              </SignInButton>
+              <SignInButton mode="modal">
+                <button className="bg-white text-black px-4 py-2 rounded-md hover:scale-105 transition">
+                  Get Started →
+                </button>
+              </SignInButton>
+            </>
+          )}
+        </div>
       </div>
-
-      <div className="hidden md:flex items-center space-x-8">
-        <a href="#features" className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Features</a>
-        
-        
-
-        {!isSignedIn ? (
-          <>
-            <SignInButton>
-              <button className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Sign In</button>
-              
-            </SignInButton>
-            <SignInButton>
-              <button
-                onClick={() => navigate("/")}
-                className="cursor-pointer bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200 shadow-md"
-              >
-                Get Started
-              </button>
-            </SignInButton>
-
-          </>
-        ) : (
-          <>
-            <SignOutButton>
-              <button className="text-gray-700 hover:text-red-500 font-medium transition-colors duration-200">Sign Out</button>
-            </SignOutButton>
-            <div className="flex items-center gap-2">
-              <UserButton />
-              <span className="text-sm font-medium text-gray-700">{user.username || user.fullName}</span>
-            </div>
-          </>
-        )}
-      </div>
-
-      <div className="md:hidden">
-        <button className="text-gray-700">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
-    </nav>
+    </header>
   );
 };
 
