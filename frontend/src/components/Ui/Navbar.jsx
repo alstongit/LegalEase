@@ -16,20 +16,24 @@ const Navbar = () => {
 
       <div className="hidden md:flex items-center space-x-8">
         <a href="#features" className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Features</a>
-        <a href="#howitworks" className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">How It Works</a>
-        <a href="#testimonials" className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Testimonials</a>
+        
+        
 
         {!isSignedIn ? (
           <>
             <SignInButton>
               <button className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Sign In</button>
+              
             </SignInButton>
-            <button
-              onClick={() => navigate("/")}
-              className="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200 shadow-md"
-            >
-              Get Started
-            </button>
+            <SignInButton>
+              <button
+                onClick={() => navigate("/")}
+                className="cursor-pointer bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200 shadow-md"
+              >
+                Get Started
+              </button>
+            </SignInButton>
+
           </>
         ) : (
           <>

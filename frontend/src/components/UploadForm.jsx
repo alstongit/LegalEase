@@ -5,6 +5,7 @@ import DocumentSummary from "./DocumentSummary";
 import ClauseList from "./ClauseList";
 import ReviewSummary from "./ReviewSummary";
 import DownloadReport from "./DownloadReport";
+import ChatbotWidget from "./ChatbotWidget";
 
 const UploadForm = () => {
   const [file, setFile] = useState(null);
@@ -30,7 +31,8 @@ const UploadForm = () => {
       const response = await axios.post("http://127.0.0.1:8000/upload/", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-
+      console.log("Response:", response);
+      console.log(JSON.stringify(response.data, null, 2));
       setResults(response.data);
     } catch (error) {
       console.error("Error uploading file:", error);
@@ -40,8 +42,13 @@ const UploadForm = () => {
     }
   };
 
+  
+  console.log("Results:", results);
+
   const fairClauses = results?.predictions.filter(item => item.label === "fair") || [];
   const unfairClauses = results?.predictions.filter(item => item.label !== "fair") || [];
+  console.log(fairClauses, unfairClauses)
+  
 
   return (
     <div className="max-w-4xl mx-auto p-8 bg-white shadow-xl rounded-lg border border-gray-200">
@@ -84,6 +91,7 @@ const UploadForm = () => {
             <ReviewSummary review={results.review_summary} />
           </div>
           <DownloadReport results={results} />
+          <ChatbotWidget />
         </>
       )}
     </div>

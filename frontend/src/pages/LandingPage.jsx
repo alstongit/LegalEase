@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import Navbar from "../components/Ui/Navbar";
 import FeaturesSection from "../components/Ui/Features";
-import HowItWorksSection from "../components/Ui/HowItWorks";
-import InterfaceSection from "../components/Ui/Interface";
-import CallToActionSection from "../components/Ui/CallToAction";
-import TestimonialsSection from "../components/Ui/Testimonials";
+
 import FooterSection from "../components/Ui/Footer";
 import { CheckCircleIcon } from "lucide-react";
-import "@fontsource/inter"; // Import Inter font
+
+
+
 
 
 const LandingPage = () => {
@@ -75,25 +74,6 @@ const LandingPage = () => {
       <FeaturesSection />
       </div>
       
-
-      {/* How it works Section */}
-      <div id="howitworks">
-        <HowItWorksSection />
-      </div>
-      
-
-      {/* Interface Section */}
-      <div id="interface">
-      <InterfaceSection />
-      </div>
-      
-
-      {/* Testimonials Section */}
-      <div id="testimonials"><TestimonialsSection /></div>
-      
-
-      {/* Call To Action Section */}
-      <CallToActionSection />
 
       {/* Footer Section */}
       <FooterSection />
