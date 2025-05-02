@@ -18,6 +18,11 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import textwrap
 
+
+from pydantic import BaseModel
+from utils.chatbot_handler import get_chat_response
+from utils.clause_indexer import create_vector_store_from_clauses
+
 app = FastAPI()
 
 # CORS Setup
@@ -48,7 +53,9 @@ async def upload_pdf(file: UploadFile = File(...)):
 
     # Step 2: Split into clauses using Gemini
     clauses = split_into_clauses(text)
+    create_vector_store_from_clauses(clauses)
 
+    
     # Step 3: Predict
     predictions = classifier.predict(clauses)
 
@@ -59,18 +66,27 @@ async def upload_pdf(file: UploadFile = File(...)):
     # Step 5: Generate review + summary
     review_data = generate_review(fair_clauses, unfair_clauses)
 
-    # Step 6: Return all data
-    return {
-        "filename": file.filename,
-        "total_clauses": len(clauses),
-        "predictions": predictions,
-        "doc_summary": review_data["doc_summary"],
-        "review_summary": review_data["review_summary"],
-        "fair_clauses": fair_clauses,
-        "unfair_clauses": unfair_clauses,
-    }
+    response_data = {
+    "filename": file.filename,
+    "total_clauses": len(clauses),
+    "predictions": predictions,
+    "doc_summary": review_data["doc_summary"],
+    "review_summary": review_data["review_summary"],
+    "fair_clauses": fair_clauses,
+    "unfair_clauses": unfair_clauses,
+}
 
+    print(response_data)  # For debugging
 
+    return response_data
+
+class QueryRequest(BaseModel):
+    query: str
+
+@app.post("/chat")
+def ask_question(request: QueryRequest):
+    answer = get_chat_response(request.query)
+    return {"answer": answer}
 
 
 @app.post("/generate-pdf/")
